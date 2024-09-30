@@ -1,4 +1,4 @@
-package com.tq.mindset.dto;
+package com.tq.mindset.dto.authDto;
 
 import lombok.Data;
 
@@ -8,11 +8,7 @@ public class RegisterUserDto {
 
     private String password;
 
-    private String fullName;
-
     private String firstName;
 
     private String lastName;
-
-    // getters and setters here...
 }

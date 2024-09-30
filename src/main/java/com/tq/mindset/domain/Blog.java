@@ -7,38 +7,59 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data  // Lombok will generate getters, setters, toString, equals, and hashCode
-@NoArgsConstructor  // Generates a no-argument constructor
-@AllArgsConstructor // Generates an all-argument constructor
-@Builder // Provides a builder pattern for creating instances
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Blog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String title;
-    private String description;
+
     private String subtitle;
+    private String description;
 
-    @Lob
-    private String content;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "blog_tags",  // Define the join table name
-            joinColumns = @JoinColumn(name = "blog_id"),  // Foreign key in blog_tags pointing to Blog
-            inverseJoinColumns = @JoinColumn(name = "tag_id")  // Foreign key in blog_tags pointing to Tag
-    )
-    private Set<Tag> tags = new HashSet<>();
+    @Column
+    private int likedCount;
 
+    @Column
+    private int dislikedCount;
+
+    @Column
+    private int visitedCount;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
-    private String author;
+
+    private boolean hasEdited = false;
+
+    @ManyToMany
+    @JoinTable(
+            name = "blog_tags",
+            joinColumns = @JoinColumn(name = "blog_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, orphanRemoval = true)
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
+    private Set<Content> contents;
 
     @PrePersist
     private void onCreate() {

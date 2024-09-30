@@ -7,15 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
+@Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Tag {
-
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,14 +33,6 @@ public class Tag {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    private String color;
-    private String category;
-    private int categoryOrder;
-    private int tagOrder;
-
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
-    private Set<Blog> blogs;
-
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
-    private Set<Project> projects;
+    @OneToOne(mappedBy = "role")
+    private User user;
 }

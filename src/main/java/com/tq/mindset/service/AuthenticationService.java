@@ -1,7 +1,7 @@
 package com.tq.mindset.service;
 
-import com.tq.mindset.dto.LoginUserDto;
-import com.tq.mindset.dto.RegisterUserDto;
+import com.tq.mindset.dto.authDto.LoginUserDto;
+import com.tq.mindset.dto.authDto.RegisterUserDto;
 import com.tq.mindset.domain.User;
 import com.tq.mindset.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,40 +11,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService {
-    private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
-    private final AuthenticationManager authenticationManager;
-
-    public AuthenticationService(
-            UserRepository userRepository,
-            AuthenticationManager authenticationManager,
-            PasswordEncoder passwordEncoder
-    ) {
-        this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    public User signup(RegisterUserDto input) {
-        User user = new User();
-        user.setFullName(input.getFullName());
-        user.setEmail(input.getEmail());
-        user.setPassword(passwordEncoder.encode(input.getPassword()));
-
-        return userRepository.save(user);
-    }
-
-    public User authenticate(LoginUserDto input) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        input.getEmail(),
-                        input.getPassword()
-                )
-        );
-
-        return userRepository.findByEmail(input.getEmail())
-                .orElseThrow();
-    }
 }

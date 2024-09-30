@@ -1,8 +1,8 @@
 package com.tq.mindset.controller;
 
 import com.tq.mindset.domain.User;
-import com.tq.mindset.dto.LoginUserDto;
-import com.tq.mindset.dto.RegisterUserDto;
+import com.tq.mindset.dto.authDto.LoginUserDto;
+import com.tq.mindset.dto.authDto.RegisterUserDto;
 import com.tq.mindset.response.LoginResponse;
 import com.tq.mindset.service.AuthenticationService;
 import com.tq.mindset.service.JwtService;

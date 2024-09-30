@@ -1,18 +1,18 @@
 package com.tq.mindset.domain;
 
+import com.tq.mindset.domain.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "mindset_user") // Renamed from 'user' to 'app_user'
@@ -26,28 +26,46 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(nullable = false)
-    private String fullName;
-
-    @Column(nullable = false)
     private String firstName;
 
     @Column(nullable = false)
     private String lastName;
 
-    @Column(unique = true, length = 100, nullable = false)
+    @Column(nullable = false)
+    private String fullName;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @CreationTimestamp
-    @Column(updatable = false, name = "created_at")
-    private Date createdAt;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Date updatedAt;
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+    private String title;
+    private String headline;
+    private LocalDateTime lastActiveAt;
+    private String avatarURL;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Blog> blogs;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Project> projects;
+
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+
+    //SPRING SECURITY
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -74,7 +92,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername(){
+    public String getUsername() {
         return email;
     }
 }
