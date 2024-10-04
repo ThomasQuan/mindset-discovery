@@ -1,8 +1,8 @@
-# Spring Boot Backend Project
+# Spring Boot Backend Discovery Project 
 
 ## Overview
 
-This repository contains a Spring Boot application that serves as the backend for my personal website. It's built using Domain-Driven Design (DDD) principles and incorporates various Spring ecosystem technologies.
+This repository contains a Spring Boot application that serves as the first attempt at building a backend for my personal website. It's built using Domain-Driven Design (DDD) principles and incorporates various Spring ecosystem technologies.
 
 ## Technologies Used
 
