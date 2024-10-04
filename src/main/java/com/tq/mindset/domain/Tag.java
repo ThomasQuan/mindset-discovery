@@ -41,7 +41,4 @@ public class Tag {
 
     @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private Set<Blog> blogs;
-
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
-    private Set<Project> projects;
 }

@@ -44,20 +44,10 @@ public class Content {
             joinColumns = @JoinColumn(name = "content_id"),
             inverseJoinColumns = @JoinColumn(name = "asset_id")
     )
-    private Set<Asset> assets;
-
-    @OneToOne(mappedBy = "content", cascade = CascadeType.ALL)
-    private Language language;
 
     @ManyToOne
     @JoinColumn(name = "blog_id")
     @lombok.ToString.Exclude
     @lombok.EqualsAndHashCode.Exclude
     private Blog blog;
-
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    @lombok.ToString.Exclude
-    @lombok.EqualsAndHashCode.Exclude
-    private Project project;
 }

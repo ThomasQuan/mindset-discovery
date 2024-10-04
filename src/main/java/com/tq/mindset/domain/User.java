@@ -57,8 +57,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Blog> blogs;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Project> projects;
 
     @OneToOne
     @JoinColumn(name = "role_id")

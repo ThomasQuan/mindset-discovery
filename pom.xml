@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tq</groupId>
-    <artifactId>mindset</artifactId>
+    <artifactId>mindset-discovery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mindset</name>
+    <name>mindset-discovery</name>
     <description>Database host for Thomas Quan website</description>
     <url/>
     <licenses>

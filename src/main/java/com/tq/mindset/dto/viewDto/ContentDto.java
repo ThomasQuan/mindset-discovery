@@ -14,8 +14,5 @@ public class ContentDto {
     private ContentStatus status;
     private int orderNo;
     private String objectAs;
-    private Set<Asset> assets;
-    private Long languageId;
     private Long blogId;
-    private Long projectId;
 }

@@ -18,4 +18,5 @@ public class UserDto {
     private String headline;
     private LocalDateTime lastActiveAt;
     private String avatarURL;
+    private String username;
 }
